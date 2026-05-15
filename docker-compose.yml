@@ -2,7 +2,10 @@ version: "3.9"
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+
     container_name: my-node-app
 
     ports:
@@ -12,6 +15,12 @@ services:
       - .:/app
       - /app/node_modules
 
+    environment:
+      NODE_ENV: development
+
     restart: unless-stopped
 
-    command: npm start
+    command: npm run dev
+
+    stdin_open: true
+    tty: true
